@@ -1,7 +1,7 @@
-import { init, RematchDispatch, RematchRootState, Models } from "@rematch/core";
-import loadingPlugin, { ExtraModelsFromLoading } from "@rematch/loading";
-import auth from "./auth";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { init, RematchDispatch, RematchRootState, Models } from '@rematch/core';
+import loadingPlugin, { ExtraModelsFromLoading } from '@rematch/loading';
+import auth from './auth';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export interface RootModel extends Models<RootModel> {
   auth: typeof auth;

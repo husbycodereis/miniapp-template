@@ -1,5 +1,5 @@
-import { createModel } from "@rematch/core";
-import { RootModel } from "../store";
+import { createModel } from '@rematch/core';
+import { RootModel } from '../store';
 // import AuthManager from './api'
 
 export type AuthState = {
@@ -9,7 +9,7 @@ export type AuthState = {
 const auth = createModel<RootModel>()({
   state: {
     user: {
-      name: "deneme",
+      name: 'deneme',
     },
   } as AuthState,
 
@@ -22,14 +22,14 @@ const auth = createModel<RootModel>()({
     },
   },
 
-  effects: (dispatch) => ({
-    // async getUserAsync({ code }: any): Promise<any> {
-    //   let response = await AuthManager.login({ code })
-    //   dispatch.auth.setUser(response)
-    //   dispatch.app.getAddressesAsync()
-    //   dispatch.app.getBillsAsync()
-    // }
-  }),
+  // effects: (dispatch) => ({
+  //   // async getUserAsync({ code }: any): Promise<any> {
+  //   //   let response = await AuthManager.login({ code })
+  //   //   dispatch.auth.setUser(response)
+  //   //   dispatch.app.getAddressesAsync()
+  //   //   dispatch.app.getBillsAsync()
+  //   // }
+  // }),
 });
 
 export default auth;

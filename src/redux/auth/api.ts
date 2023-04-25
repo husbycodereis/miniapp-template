@@ -1,46 +1,38 @@
-export {};
-// import { CALLBACK_URL } from '../../constants/configuration'
-// import httpclient from '../../plugins/http-client'
+import { url } from '../../constants/apiUrls';
+import { HttpRequest, RequestType } from '../../helpers/httpRequest';
+import { GetComposedUrlType, User } from '../../types';
 
-// const urls = {
-//   get: {
-//     getCreateUrl: 'auth/create-url/'
-//   },
-//   post: {
-//     login: 'auth/login/'
-//   }
-// }
+class AuthManager {
+  public static getComposedUrl = async () => {
+    const CALLBACK_URL = `${window.location.protocol}//${window.location.host}`;
 
-// class AuthManager {
-//   public static getCreateUrl = async () => {
-//     const response: any = await httpclient.fetch({
-//       method: 'POST',
-//       path: urls.get.getCreateUrl,
-//       body: { redirectUrl: CALLBACK_URL }
-//     })
-//     window.location.replace(response.data.url)
-//     return
-//   }
+    const response = await HttpRequest<any, GetComposedUrlType>({
+      url: url.GET_COMPOSED_URL,
+      body: {
+        redirect_uri: CALLBACK_URL,
+      },
+      method: RequestType.POST,
+    });
 
-//   public static login = async ({ code }: { code: string }) => {
-//     const response: any = await httpclient.fetch({
-//       method: 'POST',
-//       path: urls.post.login,
-//       body: { redirectUrl: CALLBACK_URL, code }
-//     })
-//     localStorage.setItem('user_email', response.data.email)
-//     localStorage.setItem('user_name', response.data.name)
-//     localStorage.setItem('user_surname', response.data.surname)
-//     localStorage.setItem('token', response.data.token)
-//     localStorage.setItem('dateTime', JSON.stringify(new Date()))
-//     return response
-//   }
-// }
+    window.location.assign(response.composed_url);
+  };
 
-// export interface IGetAppVerionsRequest {
-//   page?: number | undefined
-//   pageSize?: number | undefined
-//   appName?: string
-// }
+  public static login = async ({ code }: { code: string }) => {
+    const CALLBACK_URL = `${window.location.protocol}//${window.location.host}`;
+    console.log('CALLBACK_URL', CALLBACK_URL);
+    const response = await HttpRequest<null, User | any>({
+      url: url.LOGIN + `?code=${code}&redirect_uri=${CALLBACK_URL}`,
+      method: RequestType.GET,
+    });
+    if (!response.token) window.location.replace('/');
+    localStorage.setItem('token', response.token);
+  };
+}
 
-// export default AuthManager
+export interface IGetAppVerionsRequest {
+  page?: number | undefined;
+  pageSize?: number | undefined;
+  appName?: string;
+}
+
+export default AuthManager;

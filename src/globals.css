@@ -4,7 +4,7 @@
 
 @layer base {
   .screen-title {
-    font-family: "Montserrat", sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 38px;
@@ -87,7 +87,7 @@
 
 body {
   background-color: #f5f7fb;
-  font-family: "Barlow", sans-serif;
+  font-family: 'Barlow', sans-serif;
 }
 
 * {
@@ -95,9 +95,8 @@ body {
 }
 
 .react-modal-sheet-backdrop {
-  background-color: "transparent";
+  background-color: 'transparent';
 }
-
 
 .leaflet-container {
   width: 100vw;
@@ -145,8 +144,7 @@ a {
 input,
 textarea
 
-/*.contenteditable?*/
-  {
+/*.contenteditable?*/ {
   -webkit-touch-callout: default;
   -webkit-user-select: text;
   -moz-user-select: text;

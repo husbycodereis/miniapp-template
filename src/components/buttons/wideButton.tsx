@@ -1,4 +1,4 @@
-import { ButtonType } from "../../types/generals";
+import { ButtonType } from '../../types/generals';
 
 function WideButton({
   type,
@@ -14,9 +14,9 @@ function WideButton({
   function getButtonType() {
     switch (type) {
       case ButtonType.ActiveFilled:
-        return `${"bg-red-400"}   w-full py-4 border-icon-primary border-solid rounded-[16px] text-medium text-white`;
+        return `${color}   w-full py-4 border-icon-primary border-solid rounded-[16px] text-medium text-white`;
       case ButtonType.ActiveUnfilled:
-        return "w-full border-[2px] py-4 border-icon-primary border-solid rounded-[16px] text-medium text-white";
+        return 'w-full border-[2px] py-4 border-icon-primary border-solid rounded-[16px] text-medium text-white';
       case ButtonType.InactiveFilled:
         return `bg-disabled-button   w-full py-4 border-icon-primary border-solid rounded-[16px] text-medium text-white`;
       case ButtonType.InactiveUnfilled:
@@ -28,14 +28,11 @@ function WideButton({
 
   const buttonType = getButtonType();
   return (
-    <div className="px-6">
+    <div className='px-6'>
       <button
         onClick={onClick}
         className={buttonType}
-        disabled={
-          type === ButtonType.InactiveFilled ||
-          type === ButtonType.InactiveUnfilled
-        }
+        disabled={type === ButtonType.InactiveFilled || type === ButtonType.InactiveUnfilled}
       >
         {title}
       </button>
