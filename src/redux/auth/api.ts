@@ -1,31 +1,32 @@
 import { url } from '../../constants/apiUrls';
 import { HttpRequest, RequestType } from '../../helpers/httpRequest';
-import { GetComposedUrlType, User } from '../../types';
+import { GetComposedUrlType, LoginRequestType, User } from '../../types';
 
 class AuthManager {
   public static getComposedUrl = async () => {
     const CALLBACK_URL = `${window.location.protocol}//${window.location.host}`;
 
     const response = await HttpRequest<any, GetComposedUrlType>({
-      url: url.GET_COMPOSED_URL,
-      body: {
-        redirect_uri: CALLBACK_URL,
-      },
-      method: RequestType.POST,
+      url: `${url.GET_COMPOSED_URL}?redirectUri=${CALLBACK_URL}`,
+      method: RequestType.GET,
     });
-
-    window.location.assign(response.composed_url);
+    window.location.assign(response.composedUrl);
   };
 
   public static login = async ({ code }: { code: string }) => {
     const CALLBACK_URL = `${window.location.protocol}//${window.location.host}`;
-    console.log('CALLBACK_URL', CALLBACK_URL);
-    const response = await HttpRequest<null, User | any>({
-      url: url.LOGIN + `?code=${code}&redirect_uri=${CALLBACK_URL}`,
-      method: RequestType.GET,
+    const response = await HttpRequest<LoginRequestType, User | any>({
+      url: url.LOGIN,
+      body: {
+        code: code,
+        redirectUri: `${CALLBACK_URL}`,
+      },
+
+      method: RequestType.POST,
     });
-    if (!response.token) window.location.replace('/');
-    localStorage.setItem('token', response.token);
+    if (!response.access_token) window.location.replace('/');
+    localStorage.setItem('token', response.access_token);
+    return response;
   };
 }
 

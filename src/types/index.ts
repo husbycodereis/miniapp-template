@@ -23,6 +23,7 @@ export interface User {
   preferred_username: string;
   given_name: string;
   family_name: string;
+  email: string;
   statusCode: number;
 }
 
@@ -47,5 +48,19 @@ export interface SuperAppUser {
 export interface GetComposedUrlType {
   clientId: string;
   authUrl: string;
-  composed_url: string;
+  composedUrl: string;
+}
+
+export interface LoginRequestType {
+  code: string;
+  redirectUri: string;
+}
+export interface PdfRequestType {
+  file: FormData;
+  text: string;
+  email: string;
+}
+export interface PdfResponseType {
+  messageId: string;
+  instanceId: string;
 }

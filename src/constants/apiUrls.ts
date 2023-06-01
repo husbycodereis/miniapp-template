@@ -1,9 +1,11 @@
-const API_URL = 'https://wormsbaseapi.westerops.com';
+const API_URL = 'https://mtravelapi.westerops.com';
 
 const url = {
-  GET_COMPOSED_URL: 'auth/getComposedUrl',
-  LOGIN: 'auth/login-oidc',
-  //SURVEYS: "surveys",
+  GET_COMPOSED_URL: '/auth/getComposedUrl',
+  LOGIN: '/auth/client/login',
+  SEND_ATTACHMENT: '/chat/sendAttachment',
+  PAYMENT: '/payment/paymentTransactionInitialization',
+  PAYMENT_STATUS: '/payment/paymentTransactionStatus',
 };
 
 export { API_URL, url };
